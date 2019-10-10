@@ -61,6 +61,7 @@ header=$(paste <(echo "chromosome") \
                 <(echo "MutationTaster") \
                 <(echo "SIFT") \
                 <(echo "Polyphen2") \
+                <(echo "Inheritance") \
                 --delimiters '\t')
 echo "$header" >> "$OUT_CSV_FILE"
 
@@ -112,6 +113,7 @@ transcript=$(sed '1d; s/^.*Transcript|//' "$INPUTFILE" | tr "; && |" " " | awk '
 MutationTaster=$(sed '1d; s/^.*MutationTaster_pred=//' "$INPUTFILE" | tr "; && |" " " | awk '{print $1}' | sed -e 's/chr.*/./g')
 SIFT=$(sed '1d; s/^.*SIFT_pred=//' "$INPUTFILE" | tr "; && |" " " | awk '{print $1}' | sed -e 's/chr.*/./g')
 Polyphen2=$(sed '1d; s/^.*Polyphen2_HDIV_pred=//' "$INPUTFILE" | tr "; && |" " " | awk '{print $1}' | sed -e 's/chr.*/./g')
+Inheritance=$(sed '1d; s/^.*GeneticModels=//' "$INPUTFILE" | tr ";" " " | awk '{print $1}')
 ####
 ## features to develop/add
 # CADD=$(sed '1d; s/^.*dbNSFP_CADD_phred=//' "$INPUTFILE" | tr "; && | && ," " " | awk '{print $1}' | sed -e 's/chr.*/./g')
@@ -144,6 +146,7 @@ dataset=$(paste <(echo "$chrom") \
                 <(echo "$MutationTaster") \
                 <(echo "$SIFT") \
                 <(echo "$Polyphen2") \
+                <(echo "$Inheritance") \
                     --delimiters '\t')
 echo "$dataset" >> "$OUT_CSV_FILE"
 ##/END

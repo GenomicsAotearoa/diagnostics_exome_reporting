@@ -54,6 +54,14 @@ function(input, output, session) {
       file.copy(in_vcfFile$datapath, file.path(".", in_vcfFile$name))  # NOTE: this file.path needs to reflect the location of exome data (user edit)
     })
     
+    # allow user upload of PED file
+    observeEvent(input$pedFile, {
+      in_pedFile <- input$pedFile
+      if (is.null(in_pedFile))
+        return()
+      file.copy(in_pedFile$datapath, file.path(".", in_pedFile$name))  # NOTE: this file.path needs to reflect the location of exome data (user edit)
+    })    
+
     # allow user upload of text QC file
     observeEvent(input$txtFile, {
       in_txtFile <- input$txtFile

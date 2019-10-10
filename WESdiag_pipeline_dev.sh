@@ -215,6 +215,17 @@ java -jar "$SNPSIFT" split -j vcf/test_* > vcf/"$filename"_dbSNP_VEP_dbNSFP.vcf
 rm chr_list.txt
 rm vcf/test_*
 rm vcf/*.chr*
+
+## TODO:
+## MERGE HERE ?
+
+echo ""
+echo "############################################################################"
+echo "######################### inheritance annotation ###########################"
+echo "############################################################################"
+echo "...annotating with Inheritance information..."
+genmod annotate vcf/"$filename"_dbSNP_VEP_dbNSFP.vcf --regions | genmod models - --family_file vcf/"$filename".ped > vcf/"$filename"_dbSNP_VEP_dbNSFP_inherit.vcf -p 96
+
 ## NOTE: this section needs feature devleopment
 ## only available when annotating against hg38 
 ## SNPSift gwascatalog
@@ -236,6 +247,7 @@ echo "##########################################################################
 rm vcf/"$filename"_dbSNP.vcf
 rm vcf/"$filename"_dbSNP_VEP.vcf
 rm vcf/"$filename"_dbSNP_VEP_dbNSFP.vcf
+rm vcf/"$filename"_dbSNP_VEP_dbNSFP_inherit.vcf
 # message
 echo "...annotation done..."
 echo "...moving on to filtering..."
