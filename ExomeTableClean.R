@@ -31,6 +31,8 @@ exome_table$SIFT <- sapply(sapply(strsplit(exome_table$SIFT, ","), unique), past
 exome_table$MutationTaster <- sapply(sapply(strsplit(exome_table$MutationTaster, ","), unique), paste, collapse = ";")
 # Polyphen2
 exome_table$Polyphen2 <- sapply(sapply(strsplit(exome_table$Polyphen2, ","), unique), paste, collapse = ";")
+# Inheritance
+exome_table$Inheritance <- sapply(sapply(strsplit(exome_table$Inheritance, ","), unique), paste, collapse = ";")
 # 1KG allele freqs
 exome_table$CAF1[exome_table$CAF1 == '.'] <- 0
 exome_table$CAF1 <- as.numeric(exome_table$CAF1)
@@ -52,6 +54,7 @@ exome_table_clean <- data.frame(location = paste(exome_table$chromosome, exome_t
                           MutationTaster = exome_table$MutationTaster,
                           SIFT = exome_table$SIFT,
                           Polyphen2 = exome_table$Polyphen2,
+                          Inheritance = exome_table$Inheritance,
                           coverage = paste0(exome_table$depth_coverage, ' ', exome_table$reference_allele, '(', exome_table$Ref_coverage, 
                                             ')', ' ', exome_table$alternate_allele, '(', exome_table$Alt_coverage, ')'),
                           ref_freq = exome_table$CAF1,
